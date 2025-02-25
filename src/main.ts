@@ -3,14 +3,14 @@
 import App from "./App.vue";
 
 // createApp(App).mount('#app')
-import { Application, Container, Text } from "pixi.js";
+import { Application, Container, Text, Sprite, Texture } from "pixi.js";
 
-const app = new Application();
-await app.init({
-  width: 1700,
-  height: 650,
-});
-document.body.appendChild(app.canvas);
+const game = new Application();
+
+await game.init({ width: 1500, height: 650 });
+
+// Add the view to the DOM
+document.body.appendChild(game.canvas);
 
 import { createRenderer } from "vue";
 
@@ -22,14 +22,18 @@ const render = createRenderer<Container, Container>({
       case "Container":
         element = new Container();
         break;
+      case "Sprite":
+        element = new Sprite();
+        break;
       default:
         throw new Error(`type不存在${type}`);
         break;
     }
     return element;
   },
-  patchProp() {
+  patchProp(el, key, prevValue, nextValue) {
     // 更新属性
+    (el as Sprite).texture = Texture.from(nextValue);
   },
   insert(el, parent) {
     // 插入节点
