@@ -1,24 +1,9 @@
 <script setup lang="ts">
-import plane from "./assets/img/myPlane.png";
+import Plane from "./components/Plane.vue";
 </script>
 
 <template>
   <Container>
-    <Sprite :texture="plane"></Sprite>
+    <Plane></Plane>
   </Container>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
