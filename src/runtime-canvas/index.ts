@@ -3,6 +3,7 @@ import { createRenderer } from "vue";
 
 // createRenderer渲染pixi自定义组件
 const renderer = createRenderer<Container, Container>({
+  // 重写vue3的渲染api
   createElement(type) {
     // 创建容器
     let element;
@@ -21,7 +22,15 @@ const renderer = createRenderer<Container, Container>({
   },
   patchProp(el, key, prevValue, nextValue) {
     // 更新属性
-    (el as Sprite).texture = Texture.from(nextValue);
+    switch (key) {
+      case "texture":
+        (el as Sprite).texture = Texture.from(nextValue);
+        break;
+
+      default:
+        el[key] = nextValue;
+        break;
+    }
   },
   insert(el, parent) {
     // 插入节点

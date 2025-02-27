@@ -1,4 +1,5 @@
 import { Application } from "pixi.js";
+import { setupPlane } from "./Plane";
 
 // 绘制游戏的属性
 export const game = new Application({
@@ -8,3 +9,10 @@ export const game = new Application({
 
 // 将pixi应用添加到body-dom上
 document.body.appendChild(game.view);
+
+// 这里类似一个胶水层：粘合UI层和业务逻辑层，但并没有提供单测
+export function initGame(_plane, _bullets) {
+  const bullets = _bullets;
+  const plane = setupPlane(_plane, {}, _bullets);
+  return { plane, bullets };
+}
