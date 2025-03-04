@@ -34,3 +34,12 @@ describe("Plane", () => {
     });
   });
 });
+
+describe("攻击", () => {
+  it("attack", () => {
+    const bullets = [];
+    const plane = setupPlane({}, defaultOptions, bullets);
+    plane.attack();
+    expect(plane.bullets.length).toBe(1);
+  });
+});
